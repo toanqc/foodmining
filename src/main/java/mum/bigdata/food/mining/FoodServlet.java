@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 public class FoodServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6045703010453109L;
@@ -38,7 +40,10 @@ public class FoodServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		YelpAPI yelpApi = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
-		String res = yelpApi.searchForBusinessesByLocation("food", "Fairfield, IA");
+		String res = yelpApi.searchForBusinessesByLocation("food", "Fairfield, IA", 0);
 		out.println(res);
+
+		Gson gson = new Gson();
+		Restaurant restaurant = gson.fromJson(res, Restaurant.class);
 	}
 }

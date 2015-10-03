@@ -61,11 +61,12 @@ public class YelpAPI {
 	 *            <tt>String</tt> of the location
 	 * @return <tt>String</tt> JSON Response
 	 */
-	public String searchForBusinessesByLocation(String term, String location) {
+	public String searchForBusinessesByLocation(String term, String location, int offset) {
 		OAuthRequest request = createOAuthRequest(SEARCH_PATH);
 		request.addQuerystringParameter("term", term);
 		request.addQuerystringParameter("location", location);
 		request.addQuerystringParameter("limit", String.valueOf(SEARCH_LIMIT));
+		request.addQuerystringParameter("offset", String.valueOf(offset));
 		return sendRequestAndGetResponse(request);
 	}
 
