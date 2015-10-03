@@ -23,7 +23,6 @@ import org.scribe.oauth.OAuthService;
 public class YelpAPI {
 
 	private static final String API_HOST = "api.yelp.com";
-	private static final int SEARCH_LIMIT = 20;
 	private static final String SEARCH_PATH = "/v2/search";
 	private static final String BUSINESS_PATH = "/v2/business";
 
@@ -61,11 +60,11 @@ public class YelpAPI {
 	 *            <tt>String</tt> of the location
 	 * @return <tt>String</tt> JSON Response
 	 */
-	public String searchForBusinessesByLocation(String term, String location, int offset) {
+	public String searchForBusinessesByLocation(String term, String location, int limit, int offset) {
 		OAuthRequest request = createOAuthRequest(SEARCH_PATH);
 		request.addQuerystringParameter("term", term);
 		request.addQuerystringParameter("location", location);
-		request.addQuerystringParameter("limit", String.valueOf(SEARCH_LIMIT));
+		request.addQuerystringParameter("limit", String.valueOf(limit));
 		request.addQuerystringParameter("offset", String.valueOf(offset));
 		return sendRequestAndGetResponse(request);
 	}
